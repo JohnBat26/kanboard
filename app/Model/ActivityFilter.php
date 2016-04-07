@@ -184,12 +184,12 @@ class ActivityFilter extends Base
     public function reorganizeDataParameters(array $events)
     {
         foreach ($events as &$event) {
-            $event += $this->decode($event['data']);
+            $event += $this->projectActivity->decode($event['data']);
             unset($event['data']);
 
             $event['author'] = $event['author_name'] ?: $event['author_username'];
             $event['event_title'] = $this->notification->getTitleWithAuthor($event['author'], $event['event_name'], $event);
-            $event['event_content'] = $this->getContent($event);
+            $event['event_content'] = $this->projectActivity->getContent($event);
         }
 
         return $events;
@@ -209,7 +209,8 @@ class ActivityFilter extends Base
                 ProjectActivity::TABLE.'.*',
                 User::TABLE.'.username AS author_username',
                 User::TABLE.'.name AS author_name',
-                User::TABLE.'.email'
+                User::TABLE.'.email',
+                User::TABLE.'.avatar_path'
             )
             ->in(ProjectActivity::TABLE.'.project_id', $project_ids)
             ->callback(array($this, 'reorganizeDataParameters'));
@@ -264,10 +265,6 @@ class ActivityFilter extends Base
      */
     public function filterByCreationDate($date)
     {
-        if ($date === 'recently') {
-            return $this->filterRecentlyDate(ProjectActivity::TABLE.'.date_creation');
-        }
-
         return $this->filterWithOperator(ProjectActivity::TABLE.'.date_creation', $date, true);
     }
 
@@ -364,29 +361,5 @@ class ActivityFilter extends Base
         }
 
         return $this;
-    }
-
-    /**
-     * Get the event html content
-     *
-     * @access public
-     * @param  array     $params    Event properties
-     * @return string
-     */
-    public function getContent(array $params)
-    {
-        return ProjectActivity::getContent($params);
-    }
-
-    /**
-     * Decode event data, supports unserialize() and json_decode()
-     *
-     * @access public
-     * @param  string   $data   Serialized data
-     * @return array
-     */
-    public function decode($data)
-    {
-        return ProjectActivity::decode($data);
     }
 }

@@ -10,14 +10,12 @@
     </div>
     <?php endif ?>
 
-    <div class="search">
-        <form method="get" action="<?= $this->url->dir() ?>" class="search">
-            <?= $this->form->hidden('controller', array('controller' => 'search')) ?>
-            <?= $this->form->hidden('action', array('action' => 'activity')) ?>
-            <?= $this->form->text('search', array(), array(), array('placeholder="'.t('Search').'"'), 'form-input-large') ?>
-            <?= $this->render('app/activity_filters_helper') ?>
-        </form>
-    </div>
+    <form method="get" action="<?= $this->url->dir() ?>" class="search">
+        <?= $this->form->hidden('controller', array('controller' => 'search')) ?>
+        <?= $this->form->hidden('action', array('action' => 'activity')) ?>
+        <?= $this->form->text('search', array(), array(), array('placeholder="'.t('Search').'"'), 'form-input-large') ?>
+        <?= $this->render('app/activity_filters_helper') ?>
+    </form>
 
     <?php if (!$events->isEmpty()): ?>
     <div class="page-header">

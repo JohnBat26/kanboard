@@ -97,7 +97,8 @@ class ProjectActivity extends Base
                     self::TABLE.'.*',
                     User::TABLE.'.username AS author_username',
                     User::TABLE.'.name AS author_name',
-                    User::TABLE.'.email'
+                    User::TABLE.'.email',
+                    User::TABLE.'.avatar_path'
                 )
                 ->in('project_id', $project_ids)
                 ->join(User::TABLE, 'id', 'creator_id')
@@ -122,7 +123,7 @@ class ProjectActivity extends Base
      * @param  integer     $limit           Maximum events number
      * @param  integer     $start           Timestamp of earliest activity
      * @param  integer     $end             Timestamp of latest activity
-     * @return array
+     * @return \PicoDb\Table
      */
     public function getProject($project_id, $limit = 50, $start = null, $end = null)
     {
@@ -137,7 +138,7 @@ class ProjectActivity extends Base
      * @param  integer     $limit           Maximum events number
      * @param  integer     $start           Timestamp of earliest activity
      * @param  integer     $end             Timestamp of latest activity
-     * @return array
+     * @return \PicoDb\Table
      */
     public function getProjects(array $project_ids, $limit = 50, $start = null, $end = null)
     {
@@ -180,7 +181,7 @@ class ProjectActivity extends Base
      * @param  integer     $limit           Maximum events number
      * @param  integer     $start           Timestamp of earliest activity
      * @param  integer     $end             Timestamp of latest activity
-     * @return array
+     * @return \PicoDb\Table
      */
     public function getTask($task_id, $limit = 50, $start = null, $end = null)
     {

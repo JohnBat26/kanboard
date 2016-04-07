@@ -17,6 +17,7 @@ class Activity extends Base
      * @param  integer  $task_id
      * @param  string   $action
      * @param  integer  $max
+     * @return \Kanboard\Core\Paginator
      */
     private function getActivityPaginatorByTask($task_id, $action='task', $max=50)
     {
@@ -38,6 +39,7 @@ class Activity extends Base
      * @param  integer  $project_id
      * @param  string   $action
      * @param  integer  $max
+     * @return \Kanboard\Core\Paginator
      */
     private function getActivityPaginatorByProject($project_id, $action='project', $max=50)
     {
