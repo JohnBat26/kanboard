@@ -1162,7 +1162,7 @@ return array(
     'Search by creation date: ' => 'Поиск по дате создания: ',
     'Search by task status: ' => 'Поиск по статусу задачи: ',
     'Search by task title: ' => 'Поиск по заголоску задачи: ',
-    'Activity stream search' => 'Поиск в потоке активности; ',
+    'Activity stream search' => 'Поиск в потоке активности',
     'Projects where "%s" is manager' => 'Проекты, где менеджером является "%s"',
     'Projects where "%s" is member' => 'Проекты, где членом является "%s"',
     'Open tasks assigned to "%s"' => 'Открытые задачи, назначенные на "%s"',
